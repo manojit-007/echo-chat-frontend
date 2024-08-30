@@ -31,7 +31,7 @@ function App() {
       try {
         const response = await apiClient.get(GET_USER_INFO, {
           withCredentials: true,
-          headers: { Authorization: `Bearer ${token}` }, // Ensure token is included
+          // headers: { Authorization: `Bearer ${token}` }, // Ensure token is included
         });
         setUserInfo(response.data.user); // Update the userInfo state with fetched data
       } catch (error) {
