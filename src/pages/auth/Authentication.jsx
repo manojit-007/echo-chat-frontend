@@ -23,7 +23,7 @@ import { useNavigate } from "react-router-dom";
 
 const Authentication = () => {
   const navigate = useNavigate();
-  const { setUserInfo } = useStore();
+  const { setUserInfo,setToken,token } = useStore();
   const [value, setValue] = useState("login");
   const [state, setState] = useState(true);
   const [error, setError] = useState("");
@@ -70,6 +70,7 @@ const Authentication = () => {
           setPassword("");
           setConfirmPassword("");
           setUserInfo(response.data.user);
+          setToken(response.data.token);
           navigate(response.data.user.profileSetup ? "/chat" : "/profile");
         }
       } catch (error) {
@@ -90,6 +91,7 @@ const Authentication = () => {
           { withCredentials: true }
         );
         if (response.status === 201) {
+          console.log(response);
           toast.success("Account created successfully.");
           setValue("login");
           setEmail("");
@@ -97,6 +99,8 @@ const Authentication = () => {
           setConfirmPassword("");
           setError("");
           setUserInfo(response.data.user);
+          setToken(response.data.token);
+          console.log(token);
           navigate("/profile");
         }
       } catch (error) {

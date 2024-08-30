@@ -19,7 +19,7 @@ const Title = ({ text }) => {
 
 const ContactContainer = () => {
   // const [contacts, setContacts] = useState([]);
-  const {friendList,setFriendList} = useStore()
+  const {friendList,setFriendList,token} = useStore()
 
   useEffect(() => {
     const getFriendsList = async () => {
@@ -28,6 +28,7 @@ const ContactContainer = () => {
           GET_ALL_CONTACT_LIST_OF_FRIENDS_ROUTE,
           {
             withCredentials: true,
+            headers: { Authorization: `Bearer ${token}` }, // Correct format for headers
           }
         );
         if (response.data.contacts) {
@@ -39,7 +40,7 @@ const ContactContainer = () => {
       }
     };
     getFriendsList();
-  }, [setFriendList]);
+  }, [setFriendList, token]);
 
   return (
     <section className="relative md:w-[35vw] lg:w-[30vw] xl:w-[20vw] border-r-2 text-white bg-[#1c1d25] border-[#2f303b] w-full">

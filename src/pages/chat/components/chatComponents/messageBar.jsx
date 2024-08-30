@@ -20,7 +20,7 @@ const MessageBar = () => {
     setUploadingStatus,
     setDownloadProgress,
     setDownloadingStatus,
-    setUploadProgress,
+    setUploadProgress,token
   } = useStore();
   const [message, setMessage] = useState("");
   const [showEmoji, setShowEmoji] = useState(false);
@@ -70,7 +70,10 @@ const MessageBar = () => {
         formData.append("file", file);
         setUploadingStatus(true);
         const response = await apiClient.post(UPLOAD_FILE_ROUTE, formData, {
-          withCredentials: true,
+          
+            withCredentials: true,
+            headers: { Authorization: `Bearer ${token}` }, // Correct format for headers
+          
           onUploadProgress: (progressEvent) => {
             const { loaded, total } = progressEvent;
             const percentage = Math.round((loaded * 100) / total);

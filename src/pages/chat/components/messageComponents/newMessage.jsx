@@ -28,7 +28,7 @@ const NewChat = () => {
     selectedChatType,
     selectedChatData,
     setSelectedChatType,
-    setSelectedChatData,
+    setSelectedChatData,token
   } = useStore();
   const [openNewContactModal, setUpNewContactModal] = useState(false);
   const [searchAllContacts, setSearchAllContacts] = useState([]);
@@ -40,7 +40,10 @@ const NewChat = () => {
         const response = await apiClient.post(
           SEARCH_CONTACT_ROUTE,
           { search },
-          { withCredentials: true }
+          {
+            withCredentials: true,
+            headers: { Authorization: `Bearer ${token}` }, // Correct format for headers
+          }
         );
         if (response.status === 200 && response.data.contacts) {
           setSearchAllContacts(response.data.contacts);

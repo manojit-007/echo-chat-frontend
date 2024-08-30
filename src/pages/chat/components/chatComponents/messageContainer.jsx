@@ -18,7 +18,7 @@ const messageContainer = () => {
     sstSelectedChatMessages,setUploadingStatus,
     setDownloadProgress,
     setDownloadingStatus,
-    setUploadProgress
+    setUploadProgress,token
   } = useStore();
 
   const [showImage, setShowImage] = useState(false);
@@ -32,7 +32,7 @@ const messageContainer = () => {
         const response = await apiClient.post(
           GET_ALL_MESSAGES_ROUTE,
           { id: selectedChatData._id },
-          { withCredentials: true }
+          { withCredentials: true,headers: { Authorization: `Bearer ${token}` } }
         );
         if (response.data.messages) {
           sstSelectedChatMessages(response.data.messages);
@@ -44,7 +44,7 @@ const messageContainer = () => {
     if (selectedChatData && selectedChatData._id) {
       if (selectedChatType === "contact") getMessages();
     }
-  }, [selectedChatData, selectedChatType, sstSelectedChatMessages]);
+  }, [selectedChatData, selectedChatType, sstSelectedChatMessages, token]);
 
   useEffect(() => {
     if (scrollRef.current) {
@@ -60,7 +60,10 @@ const messageContainer = () => {
       console.log(`${HOST}/${fileUrl}`);
       const response = await apiClient.get(`${HOST}/${normalizedUrl}`, {
         responseType: "blob", 
-        withCredentials: true, 
+        
+          withCredentials: true,
+          headers: { Authorization: `Bearer ${token}` }, // Correct format for headers
+        
         onDownloadProgress: (progressEvent) => {
           const progress = Math.round(
             (progressEvent.loaded / progressEvent.total) * 100
