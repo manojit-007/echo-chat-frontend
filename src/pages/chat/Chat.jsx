@@ -20,6 +20,7 @@ const Chat = () => {
     uploadProgress,
   } = useStore();
   const navigate = useNavigate();
+  // console.log(token);
 
   useEffect(() => {
     if (!userInfo.profileSetup) {

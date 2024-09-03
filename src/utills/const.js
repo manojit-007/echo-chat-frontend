@@ -25,3 +25,5 @@ export const MESSAGES_ROUTE = `${HOST}/api/messages`;
 export const GET_ALL_MESSAGES_ROUTE = `${MESSAGES_ROUTE}/getMessages`;
 export const UPLOAD_FILE_ROUTE = `${MESSAGES_ROUTE}/uploadFile`;
 
+export const CREATE_CHANNEL_ROUTE = `${MESSAGES_ROUTE}/uploadFile`;
+

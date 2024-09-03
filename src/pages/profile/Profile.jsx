@@ -61,7 +61,7 @@ const Profile = () => {
                 { firstName, lastName, color },
                 {
                   withCredentials: true,
-                  headers: { Authorization: `Bearer ${token}` }, // Correct format for headers
+                  // headers: { Authorization: `Bearer ${token}` }, // Correct format for headers
                 }
             );
             if (response.status === 200 && response.data) {

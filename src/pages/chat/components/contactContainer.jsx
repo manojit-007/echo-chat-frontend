@@ -28,7 +28,7 @@ const ContactContainer = () => {
           GET_ALL_CONTACT_LIST_OF_FRIENDS_ROUTE,
           {
             withCredentials: true,
-            headers: { Authorization: `Bearer ${token}` }, // Correct format for headers
+            // headers: { Authorization: `Bearer ${token}` }, // Correct format for headers
           }
         );
         if (response.data.contacts) {

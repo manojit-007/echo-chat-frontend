@@ -34,7 +34,7 @@ const ContactList = ({ contacts, isChannel = false }) => {
   );
 
   useEffect(() => {
-    console.log(selectedChatData);
+    // console.log(selectedChatData);
     // console.log(contacts);
     if (selectedChatData && selectedChatData._id && contacts.length > 0) {
       const selectedContact = contacts.find(
