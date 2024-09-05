@@ -1,8 +1,8 @@
 import { create } from 'zustand';
 import { createAuthSlice } from './slices/authSlice';
-import { createContactSlice } from './slices/chatSlice';
+import { createChatSlice } from './slices/chatSlice';
 
 export const useStore = create((set, get) => ({
     ...createAuthSlice(set, get),
-    ...createContactSlice(set, get),
+    ...createChatSlice(set, get),
 }));

@@ -39,8 +39,23 @@ export const SocketProvider = ({ children }) => {
           // console.log("message received from server", message);
         }
       };
+      const handleReceiveChannelMessage = (message) => {
+        console.log("handle receive channel message", message);
+        const { selectedChatType, selectedChatData, addMessage,addChannelToChannelList } =
+          useStore.getState();
+        if (
+          selectedChatType !== undefined &&
+          (selectedChatData._id === message.channelId )
+            // || selectedChatData._id === message.receiver._id
+        ) {
+          addMessage(message);
+          // console.log("message received from server", message);
+        }
+        addChannelToChannelList(message);
+      };
 
       socket.current.on("receiveMessage", handleReceiveMessage);
+      socket.current.on("receiveChannelMessage", handleReceiveChannelMessage);
 
       return () => {
         socket.current.disconnect();

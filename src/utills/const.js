@@ -25,5 +25,13 @@ export const MESSAGES_ROUTE = `${HOST}/api/messages`;
 export const GET_ALL_MESSAGES_ROUTE = `${MESSAGES_ROUTE}/getMessages`;
 export const UPLOAD_FILE_ROUTE = `${MESSAGES_ROUTE}/uploadFile`;
 
-export const CREATE_CHANNEL_ROUTE = `${MESSAGES_ROUTE}/uploadFile`;
+
+export const CHANNEL_ROUTE = `${HOST}/api/channel`;
+
+
+// export const CREATE_CHANNEL_ROUTE = `${CHANNEL_ROUTE}/createChannel`;
+export const CREATE_CHANNEL_ROUTE = `${HOST}/api/channel/createChannel`;
+export const USER_CHANNELS_ROUTE = `${HOST}/api/channel/getChannels`;
+export const CHANNEL_MESSAGES = `${HOST}/api/channel/getChannelMessages`;
+
 

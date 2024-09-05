@@ -23,7 +23,7 @@ import { useNavigate } from "react-router-dom";
 
 const Authentication = () => {
   const navigate = useNavigate();
-  const { setUserInfo,setToken,token } = useStore();
+  const { setUserInfo, setToken, token } = useStore();
   const [value, setValue] = useState("login");
   const [state, setState] = useState(true);
   const [error, setError] = useState("");
@@ -118,29 +118,32 @@ const Authentication = () => {
 
   return (
     <div className="h-[92vh] w-[100vw] flex items-center justify-center">
-      <div
-        className="h-[85vh] w-[80%] sm:w-[350px] md:w-[50%] bg-white border-2 border-solid border-sky-100 text-black rounded-2xl flex items-center 
+      {/* <div
+        className="h-[85vh] w-[80%] sm:w-[350px] md:w-[50%] bg-white border-2 border-solid border-gray-100 text-black rounded-2xl flex items-center 
         justify-center shadow-xl shadow-slate-400"
+      > */}
+       <div
+        className="h-[85vh] w-[80%] sm:w-[350px] md:w-[50%] bg-white text-black rounded-2xl flex items-center 
+        justify-center "
       >
         <Tabs value={value} onValueChange={setValue} className="w-3/4">
           <h1 className="text-4xl font-semibold md:text-5xl sm:text-3xl mb-4 text-black-600 font-sans w-full text-center">
             Welcome ✌️
           </h1>
           <TabsList className="shadow-xl shadow-stone-400 flex items-center justify-center w-full">
-            <TabsTrigger value="login" className="text-sky-700 font-bold w-1/2">
+            <TabsTrigger value="login" className="text-black font-bold w-1/2">
               Log In
             </TabsTrigger>
             <TabsTrigger
               value="account"
-              className="text-sky-700 font-bold w-1/2"
-            >
+              className="text-black font-bold w-1/2">
               Sign Up
             </TabsTrigger>
           </TabsList>
           <TabsContent value="account">
-            <Card className="border-solid border-sky-300 rounded-xl p-4">
+            <Card className="border-solid border-gray-300 rounded-xl p-4">
               <CardHeader>
-                <CardTitle className="flex items-center justify-center text-sky-500 font-bold">
+                <CardTitle className="flex items-center justify-center text-gray-950 font-bold">
                   Sign Up
                 </CardTitle>
                 <CardDescription className="text-center font-semibold">
@@ -153,7 +156,7 @@ const Authentication = () => {
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
                   placeholder="Email"
-                  className="border-solid border-sky-300 "
+                  className="border-solid border-gray-300 "
                 />
               </CardContent>
               <CardContent>
@@ -162,7 +165,7 @@ const Authentication = () => {
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
                   placeholder="Password"
-                  className="border-solid border-sky-300"
+                  className="border-solid border-gray-300"
                 />
               </CardContent>
               <CardContent>
@@ -171,31 +174,31 @@ const Authentication = () => {
                   value={confirmPassword}
                   onChange={(e) => setConfirmPassword(e.target.value)}
                   placeholder="Confirm Password"
-                  className="border-solid border-sky-300"
+                  className="border-solid border-gray-300"
                 />
               </CardContent>
               {error && <p className="text-red-500">{error}</p>}
 
               <CardFooter className="flex items-center justify-center">
                 <Button
-                  className="bg-white border-[1px] hover:bg-sky-100 mr-2 border-sky-300"
+                  className="bg-white border-[1px] hover:bg-gray-200 mr-2 border-gray-300"
                   onClick={() => setState(!state)}
                 >
                   {state ? (
-                    <i className="fa-solid fa-eye text-sky-300"></i>
+                    <i className="fa-solid fa-eye text-gray-500"></i>
                   ) : (
-                    <i className="fa-solid fa-eye-slash text-sky-300"></i>
+                    <i className="fa-solid fa-eye-slash text-gray-500"></i>
                   )}
                 </Button>
                 <Button
-                  className="bg-white border-[1px] border-solid border-sky-300 text-sky-500 hover:bg-sky-500 hover:text-white"
+                  className="bg-white border-[1px] border-solid border-gray-300 text-gray-500 hover:bg-gray-800 hover:text-white"
                   onClick={handleSignUpSubmit}
                 >
                   Submit
                 </Button>
               </CardFooter>
               <Button
-                className="bg-white border-sky-300 mt-4 text-sky-400 hover:bg-white hover:text-sky-600"
+                className="bg-white mt-4 text-gray-400 hover:bg-white hover:text-gray-950"
                 onClick={() => setValue("login")}
               >
                 If you already have an account
@@ -206,9 +209,9 @@ const Authentication = () => {
           {/* end of sign up */}
 
           <TabsContent value="login">
-            <Card className="border-solid border-sky-300 rounded-xl p-4">
+            <Card className="border-solid border-gray-300 rounded-xl p-4">
               <CardHeader>
-                <CardTitle className="flex items-center justify-center text-sky-500 font-bold">
+                <CardTitle className="flex items-center justify-center text-gray-950 font-bold">
                   Log In
                 </CardTitle>
                 <CardDescription className="text-center font-semibold">
@@ -221,7 +224,7 @@ const Authentication = () => {
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
                   placeholder="Email"
-                  className="border-solid border-sky-300 "
+                  className="border-solid border-gray-300 "
                 />
               </CardContent>
               <CardContent>
@@ -230,29 +233,29 @@ const Authentication = () => {
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
                   placeholder="Password"
-                  className="border-solid border-sky-300"
+                  className="border-solid border-gray-300"
                 />
               </CardContent>
               <CardFooter className="flex items-center justify-center">
                 <Button
-                  className="bg-white border-[1px] hover:bg-sky-100 mr-2 border-sky-300"
+                  className="bg-white border-[1px] hover:bg-gray-200 mr-2 border-gray-300"
                   onClick={() => setState(!state)}
                 >
                   {state ? (
-                    <i className="fa-solid fa-eye text-sky-300"></i>
+                    <i className="fa-solid fa-eye text-gray-500"></i>
                   ) : (
-                    <i className="fa-solid fa-eye-slash text-sky-300"></i>
+                    <i className="fa-solid fa-eye-slash text-gray-500"></i>
                   )}
                 </Button>
                 <Button
-                  className="bg-white border-[1px] border-solid border-sky-300 text-sky-500 hover:bg-sky-500 hover:text-white"
+                  className="bg-white border-[1px] border-solid border-gray-300 text-gray-500 hover:bg-gray-950 hover:text-white"
                   onClick={handleLogInSubmit}
                 >
                   Submit
                 </Button>
               </CardFooter>
               <Button
-                className="bg-white border-sky-500 mt-4 text-sky-400 hover:bg-white hover:text-sky-600"
+                className="bg-white border-gray-500 mt-4 text-gray-400 hover:bg-white hover:text-gray-600"
                 onClick={() => setValue("account")}
               >
                 Create new account

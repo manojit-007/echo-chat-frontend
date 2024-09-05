@@ -12,41 +12,29 @@ const ContactList = ({ contacts, isChannel = false }) => {
     selectedChatData,
     setSelectedChatType,
     setSelectedChatData,
-    sstSelectedChatMessages,
+    setSelectedChatMessages,
   } = useStore();
 
   const handleEvents = useCallback(
     (contact) => {
-      if (isChannel) setSelectedChatType("channel");
-      else setSelectedChatType("contact");
+      const chatType = isChannel ? "channel" : "contact";
+      setSelectedChatType(chatType);
       setSelectedChatData(contact);
+
       if (selectedChatData && selectedChatData._id !== contact._id) {
-        sstSelectedChatMessages([]);
+        setSelectedChatMessages([]); // Clear messages if a different contact is selected
       }
     },
-    [
-      isChannel,
-      setSelectedChatType,
-      setSelectedChatData,
-      selectedChatData,
-      sstSelectedChatMessages,
-    ]
+    [isChannel, setSelectedChatType, setSelectedChatData, selectedChatData, setSelectedChatMessages]
   );
 
   useEffect(() => {
-    // console.log(selectedChatData);
-    // console.log(contacts);
     if (selectedChatData && selectedChatData._id && contacts.length > 0) {
-      const selectedContact = contacts.find(
-        (c) => c._id === selectedChatData._id
-      );
+      const selectedContact = contacts.find(c => c._id === selectedChatData._id);
       if (selectedContact) {
         handleEvents(selectedContact);
       }
     }
-    return () => {
-      console.log("cleanup");
-    };
   }, [contacts, selectedChatData, handleEvents]);
 
   return (
@@ -57,40 +45,39 @@ const ContactList = ({ contacts, isChannel = false }) => {
           className={`pl-10 py-2 transition-all duration-300 cursor-pointer flex items-center border-b-[1px] border-gray-700 ${
             selectedChatData && selectedChatData._id === contact._id
               ? "bg-[#ffffff] text-[#000] font-semibold"
-              : "bg-black text-white hover:bg-white hover:text-black"
+              : "bg-black text-white hover:bg-gray-200 hover:text-black"
           }`}
           onClick={() => handleEvents(contact)}
         >
-          <Avatar className="h-10 w-10 rounded-full mr-2 overflow-hidden">
-            {contact.image ? (
-              <AvatarImage
-                src={`${HOST}/${contact.image}`}
-                alt="profile"
-                className="object-cover w-full h-full bg-black"
-              />
-            ) : (
-              <div
-                className={`uppercase h-10 w-10 text-2xl flex items-center justify-center rounded-full border-[1px] ${getColor(
-                  contact.color
-                )}`}
-              >
-                {contact.firstName
-                  ? contact.firstName.split("").shift()
-                  : contact.email.split("").shift()}
-              </div>
-            )}
-          </Avatar>
+          {!isChannel && (
+            <Avatar className="h-10 w-10 rounded-full mr-2 overflow-hidden">
+              {contact.image ? (
+                <AvatarImage
+                  src={`${HOST}/${contact.image}`}
+                  alt="profile"
+                  className="object-cover w-full h-full bg-black"
+                />
+              ) : (
+                <div
+                  className={`uppercase h-10 w-10 text-2xl flex items-center justify-center rounded-full border-[1px] ${getColor(contact.color)}`}
+                >
+                  {contact.firstName 
+                    ? contact.firstName[0] 
+                    : contact.email[0]}
+                </div>
+              )}
+            </Avatar>
+          )}
           {isChannel && (
-            <div className="bg-[#ffffff22] h-10 w-10 flex items-center justify-center rounded-full">
-              {" "}
-              #
+            <div
+              className={`mr-2 uppercase h-10 w-10 text-2xl flex items-center justify-center rounded-full border-[1px] ${getColor()}`}
+            >
+              {contact.name ? contact.name[0] : "#"}
             </div>
           )}
-          {isChannel ? (
-            <span>{contact.name}</span>
-          ) : (
-            <span> {contact.firstName + " " + contact.lastName}</span>
-          )}
+          <span>
+            {isChannel ? contact.name : `${contact.firstName || ''} ${contact.lastName || ''}`}
+          </span>
         </div>
       ))}
     </div>

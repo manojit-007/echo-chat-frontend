@@ -18,10 +18,14 @@ export const colors = [
   "bg-[#ffffff3a] text-[#ffffff] border-[#ffffffff] border-[1px]"
 ];
 
+// const randomColorNumber = () => {
+//   return Math.floor(Math.random() * colors.length);
+// }
+
 // Function to get the color based on the provided index
 export const getColor = (colorIndex) => {
   if (colorIndex >= 0 && colorIndex < colors.length) return colors[colorIndex];
-  return colors[1]; // Default to second color if out of bounds
+  return colors[2]; // Default to second color if out of bounds
 };
 
 // Default options for Lottie animations

@@ -14,27 +14,39 @@ const ChatHeader = () => {
       <div className="flex gap-5 items-center w-full justify-between">
         <div className="flex gap-3 items-center justify-center bg-transparent">
           <div className="relative">
-            <Avatar className="h-12 w-12 rounded-full overflow-hidden">
-              {selectedChatData.image ? (
-                <AvatarImage
-                  src={`${HOST}/${selectedChatData.image}`}
-                  alt="profile"
-                  className="object-cover w-full h-full bg-transparent"
-                />
+            {
+              selectedChatType === "contact" ? (
+                <Avatar className="h-12 w-12 rounded-full overflow-hidden">
+                {selectedChatData.image ? (
+                  <AvatarImage
+                    src={`${HOST}/${selectedChatData.image}`}
+                    alt="profile"
+                    className="object-cover w-full h-full bg-transparent"
+                  />
+                ) : (
+                  <div
+                    className={`uppercase h-12 w-12 text-2xl flex items-center justify-center rounded-full border-[1px] ${getColor(
+                      selectedChatData.color
+                    )}`}
+                  >
+                    {selectedChatData.firstName
+                      ? selectedChatData.firstName.charAt(0)
+                      : selectedChatData.email.charAt(0)}
+                  </div>
+                )}
+              </Avatar>
               ) : (
                 <div
-                  className={`uppercase h-12 w-12 text-2xl flex items-center justify-center rounded-full border-[1px] ${getColor(
-                    selectedChatData.color
-                  )}`}
-                >
-                  {selectedChatData.firstName
-                    ? selectedChatData.firstName.charAt(0)
-                    : selectedChatData.email.charAt(0)}
-                </div>
-              )}
-            </Avatar>
+                className={`mr-2 uppercase h-10 w-10 text-2xl flex items-center justify-center rounded-full border-[1px] ${getColor()}`}
+              >
+                {selectedChatData.name !== undefined ? selectedChatData.name[0] : "#"}
+              </div>
+              )
+            }
+           
           </div>
           <div>
+            {selectedChatType === "channel" && selectedChatData.name}
             {selectedChatType === "contact" && selectedChatData.firstName
               ? `${selectedChatData.firstName} ${selectedChatData.lastName}`
               : selectedChatData.email}

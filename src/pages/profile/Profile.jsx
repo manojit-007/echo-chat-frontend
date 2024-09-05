@@ -65,7 +65,7 @@ const Profile = () => {
                 }
             );
             if (response.status === 200 && response.data) {
-                console.log(response.data);
+                // console.log(response.data);
                 setUserInfo({ ...response.data });
                 toast.success("Profile updated successfully.");
                 navigate("/chat");
@@ -160,7 +160,7 @@ const Profile = () => {
                 />
               ) : (
                 <div
-                  className={`uppercase h-32 w-32 md:w-48 md:h-48 text-5xl flex items-center justify-center  rounded-full border-[1px] ${getColor(
+                  className={`uppercase h-32 w-32 md:w-48 md:h-48 text-5xl flex flex-wrap items-center justify-center  rounded-full border-[1px] ${getColor(
                     color
                   )}`}
                 >

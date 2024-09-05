@@ -20,7 +20,7 @@ const MessageBar = () => {
     setUploadingStatus,
     setDownloadProgress,
     setDownloadingStatus,
-    setUploadProgress,token
+    setUploadProgress, token
   } = useStore();
   const [message, setMessage] = useState("");
   const [showEmoji, setShowEmoji] = useState(false);
@@ -38,8 +38,26 @@ const MessageBar = () => {
         messageType: "text",
         fileUrl: undefined,
       });
+    } else if (selectedChatType === "channel") {
+      // console.log(message);
+      socket.emit("sendChannelMessage", {
+        sender: userInfo.id,
+        content: message,
+        // receiver: selectedChatData._id,
+        messageType: "text",
+        fileUrl: undefined,
+        channelId: selectedChatData._id
+      });
     }
     // console.log("Message sent:", message);
+    console.table({
+      sender: userInfo.id,
+      content: message,
+      // receiver: selectedChatData._id,
+      messageType: "text",
+      fileUrl: undefined,
+      channelId: selectedChatData._id
+    })
     setMessage("");
   };
 
@@ -57,7 +75,7 @@ const MessageBar = () => {
   }, []);
 
   const handleFileInputClick = () => {
-    console.log("click");
+    // console.log("click");
     if (fileInputRef.current) {
       fileInputRef.current.click();
     }
@@ -70,10 +88,10 @@ const MessageBar = () => {
         formData.append("file", file);
         setUploadingStatus(true);
         const response = await apiClient.post(UPLOAD_FILE_ROUTE, formData, {
-          
-            withCredentials: true,
-            headers: { Authorization: `Bearer ${token}` }, // Correct format for headers
-          
+
+          withCredentials: true,
+          headers: { Authorization: `Bearer ${token}` }, // Correct format for headers
+
           onUploadProgress: (progressEvent) => {
             const { loaded, total } = progressEvent;
             const percentage = Math.round((loaded * 100) / total);
@@ -91,26 +109,37 @@ const MessageBar = () => {
               messageType: "file",
               fileUrl: response.data.filePath,
             });
+          } else if (selectedChatType === "channel") {
+            socket.emit("sendChannelMessage", {
+              sender: userInfo.id,
+              content: undefined,
+              // receiver: selectedChatData._id,
+              messageType: "file",
+              fileUrl: response.data.filePath,
+              channelId: selectedChatData._id
+            });
           }
         }
       }
     } catch (error) {
       setUploadingStatus(false);
       setUploadProgress(0); // Reset progress on error
-      console.log("Error during file upload:", error);
+      // console.log("Error during file upload:", error);
     }
   };
-  
+
 
   return (
     <div className="h-[10vh] bg-[#1c1d25] flex items-center justify-center px-4 mb-2 gap-2">
       <div className="flex-1 flex bg-[#2a2b33] rounded-md items-center gap-5 pr-5">
-        <input
-          placeholder="Message"
+        <textarea
+          placeholder="Message "
           value={message}
           onChange={(e) => setMessage(e.target.value)}
-          className="flex-1 p-4 bg-transparent rounded-md focus:border-none focus:outline-none text-white"
+          className="flex-1 pl-2 bg-transparent resize-none ic rounded-md scrollbar-hidden focus:border-none focus:outline-none text-white max-h-24 overflow-y-scroll"
+          style={{ minHeight: '40px' }} // You can adjust this based on the initial height you want
         />
+
         <button className="text-neutral-500 hover:text-white focus:outline-none focus:text-white duration-300 transition-all">
           <GrAttachment className="text-2xl" onClick={handleFileInputClick} />
         </button>
@@ -134,8 +163,9 @@ const MessageBar = () => {
           )}
         </div>
       </div>
+
       <button
-        className="hover:bg-[#00a2ff] bg-[#007bff] rounded-md flex items-center justify-center p-4 text-white focus:border-none focus:outline-none duration-300 transition-all focus:text-white"
+        className="hover:bg-[#00a2ff] bg-[#007bff] rounded-md flex items-center justify-center p-3 text-white focus:border-none focus:outline-none duration-300 transition-all focus:text-white"
         onClick={handleSendMessage}
       >
         <IoIosSend className="text-2xl" />
