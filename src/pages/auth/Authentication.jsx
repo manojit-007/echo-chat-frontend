@@ -23,13 +23,14 @@ import { useNavigate } from "react-router-dom";
 
 const Authentication = () => {
   const navigate = useNavigate();
-  const { setUserInfo, setToken, token } = useStore();
+  const { setUserInfo } = useStore();
   const [value, setValue] = useState("login");
   const [state, setState] = useState(true);
   const [error, setError] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
+  
 
   const validateForm = () => {
     if (!email) {
@@ -70,7 +71,8 @@ const Authentication = () => {
           setPassword("");
           setConfirmPassword("");
           setUserInfo(response.data.user);
-          setToken(response.data.token);
+          localStorage.setItem("JWT", response.data.token);
+          // setToken(response.data.token);
           navigate(response.data.user.profileSetup ? "/chat" : "/profile");
         }
       } catch (error) {
@@ -99,8 +101,8 @@ const Authentication = () => {
           setConfirmPassword("");
           setError("");
           setUserInfo(response.data.user);
-          setToken(response.data.token);
-          console.log(token);
+          // setToken(response.data.token);
+          // console.log(token);
           navigate("/profile");
         }
       } catch (error) {

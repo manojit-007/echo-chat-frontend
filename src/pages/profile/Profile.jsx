@@ -55,13 +55,14 @@ const Profile = () => {
 
   const handleProfileUpdate = async () => {
     if (validateProfile()) {
+      const Token = localStorage.getItem('token');
         try {
             const response = await apiClient.post(
                 UPDATE_PROFILE_ROUTE,
                 { firstName, lastName, color },
                 {
                   withCredentials: true,
-                  // headers: { Authorization: `Bearer ${token}` }, // Correct format for headers
+                  headers: { Authorization: `Bearer ${Token}` }, // Correct format for headers
                 }
             );
             if (response.status === 200 && response.data) {
