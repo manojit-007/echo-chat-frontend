@@ -149,7 +149,7 @@ const messageContainer = () => {
           className={`${messageStyle} border inline-block px-6 py-2 text-lg rounded my-1 w-auto max-w-[200px] break-words`}
           style={{ fontFamily: "monospace", overflowWrap: "break-word" }}
         >
-          {message.content}.slice(0,45)
+          {message.content}
         </div>
         
         )}
