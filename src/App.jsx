@@ -11,13 +11,13 @@ import { apiClient } from "./lib/apiClient";
 import { GET_USER_INFO } from "./utills/const";
 
 const PrivateRoute = ({ children }) => {
-  const { userInfo,token } = useStore();
+  const { userInfo } = useStore();
   const isAuthenticated = !!userInfo;
   return isAuthenticated ? children : <Navigate to="/auth" />;
 };
 
 const AuthRoute = ({ children }) => {
-  const { userInfo,token } = useStore();
+  const { userInfo } = useStore();
   const isAuthenticated = !!userInfo;
   return isAuthenticated ? <Navigate to="/chat" /> : children;
 };
