@@ -46,7 +46,7 @@ function App() {
     } else {
       setLoading(false);
     }
-  }, [userInfo, setUserInfo, token]); // Include token in dependency array
+  }, [userInfo, setUserInfo]); // Include token in dependency array
 
   if (loading) {
     return <div>Loading...</div>;
