@@ -23,7 +23,7 @@ import { useNavigate } from "react-router-dom";
 
 const Authentication = () => {
   const navigate = useNavigate();
-  const { setUserInfo } = useStore();
+  const { setUserInfo, userInfo } = useStore();
   const [value, setValue] = useState("login");
   const [state, setState] = useState(true);
   const [error, setError] = useState("");
@@ -71,6 +71,7 @@ const Authentication = () => {
           setPassword("");
           setConfirmPassword("");
           setUserInfo(response.data.user);
+          console.log(response);
           localStorage.setItem("JWT", response.data.token);
           // setToken(response.data.token);
           navigate(response.data.user.profileSetup ? "/chat" : "/profile");

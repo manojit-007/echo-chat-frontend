@@ -15,7 +15,7 @@ import { toast } from "sonner";
 
 const Profile = () => {
   const navigate = useNavigate();
-  const { userInfo, setUserInfo, token } = useStore();
+  const { userInfo, setUserInfo  } = useStore();
   const [hover, setHover] = useState(false);
   const [firstName, setFirstName] = useState(userInfo?.firstName || "");
   const [username, setUsername] = useState(userInfo?.username || "");
@@ -28,7 +28,6 @@ const Profile = () => {
   const fileInputRef = useRef(null);
 
   useEffect(() => {
-    console.log(token);
     if (userInfo.profileSetup) {
       setUsername(userInfo.username);
       setFirstName(userInfo.firstName);
@@ -42,7 +41,7 @@ const Profile = () => {
     } else {
       setImage(null); 
     }
-  }, [token, userInfo]);
+  }, [ userInfo]);
   
 
   const validateProfile = () => {

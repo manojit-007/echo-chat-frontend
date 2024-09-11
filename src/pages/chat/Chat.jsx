@@ -23,6 +23,7 @@ const Chat = () => {
   // console.log(token);
 
   useEffect(() => {
+    console.log(userInfo);
     if (!userInfo.profileSetup) {
       toast("Please set up your profile to continue.");
       navigate("/profile");
