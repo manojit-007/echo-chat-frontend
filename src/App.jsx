@@ -23,7 +23,7 @@ const AuthRoute = ({ children }) => {
 };
 
 function App() {
-  const { userInfo, setUserInfo, token } = useStore(); // Ensure token is also available
+  const { userInfo, setUserInfo } = useStore(); // Ensure token is also available
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
