@@ -28,7 +28,6 @@ import { IoIosClose } from "react-icons/io";
 import { toast } from "sonner";
 
 
-
 const CreateChannel = () => {
   const {
     setSelectedChatType,
@@ -53,7 +52,7 @@ const CreateChannel = () => {
     try {
       const response = await apiClient.get(GET_ALL_CONTACTS_ROUTE, {
         withCredentials: true,
-        // headers: { Authorization: `Bearer ${key}` },
+        // headers: { Authorization: `Bearer ${token}` },
       });
       setSearchAllContacts(response.data.contacts);
     } catch (error) {

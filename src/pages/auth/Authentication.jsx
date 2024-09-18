@@ -30,7 +30,6 @@ const Authentication = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
-  
 
   const validateForm = () => {
     if (!email) {
@@ -125,7 +124,7 @@ const Authentication = () => {
         className="h-[85vh] w-[80%] sm:w-[350px] md:w-[50%] bg-white border-2 border-solid border-gray-100 text-black rounded-2xl flex items-center 
         justify-center shadow-xl shadow-slate-400"
       > */}
-       <div
+      <div
         className="h-[85vh] w-[80%] sm:w-[350px] md:w-[50%] bg-white text-black rounded-2xl flex items-center 
         justify-center "
       >
@@ -137,9 +136,7 @@ const Authentication = () => {
             <TabsTrigger value="login" className="text-black font-bold w-1/2">
               Log In
             </TabsTrigger>
-            <TabsTrigger
-              value="account"
-              className="text-black font-bold w-1/2">
+            <TabsTrigger value="account" className="text-black font-bold w-1/2">
               Sign Up
             </TabsTrigger>
           </TabsList>
